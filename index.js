@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from "cors"; // permitir coneiones desde el domini del front
 
 import conectarDB from './config/db.js'
+import estudianteRouter from './routes/estudianteRoutes.js';
 //-----------------
 const APP = express();  //  Para concentrar la funcionalidad de express
 dotenv.config();    // va a buscar por un archivo .env
@@ -29,7 +30,7 @@ const corsOptions = {
 //----------------- routing
 //APP.use(cors(corsOptions));
 //  Para cada solicitud al path:'localhost:4000/' 
-//APP.use('/stud',userRoutes);    //  estudiantes
+APP.use('/app/estudiante',estudianteRouter);    //  estudiantes
 
 
 //------------------
