@@ -4,13 +4,13 @@ import cors from "cors"; // permitir coneiones desde el domini del front
 
 import conectarDB from './config/db.js'
 import estudianteRouter from './routes/estudianteRoutes.js';
-//-----------------
+
 const APP = express();  //  Para concentrar la funcionalidad de express
 dotenv.config();    // va a buscar por un archivo .env
 conectarDB();   //  Conexion a la base de datos
 APP.use(express.json());    //  Para procesar informacion JSON correctamente
 
-//----------------- CORS
+//- CORS
 // Configurar CORS
     // Dominios Permitidos
 const whiteList = [process.env.FRONTEND_URL];
@@ -27,13 +27,13 @@ const corsOptions = {
     }
 };
 
-//----------------- routing
-//APP.use(cors(corsOptions));
+//- routing Rutas principales
+
+//  APP.use(cors(corsOptions)); --SOLO SE DESCONECTA PARA USARSE CON EL FRONTEND
 //  Para cada solicitud al path:'localhost:4000/' 
 APP.use('/app/estudiante',estudianteRouter);    //  estudiantes
 
 
-//------------------
 //  Escucha las conexiones en el puerto 4000
 //const PORT = process.env.PORT || 4000;  // Puerto del servidor
 const PORT = 4000;  // Puerto del servidor
