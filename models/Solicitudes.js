@@ -4,7 +4,7 @@ const solicitudSchema = mongoose.Schema({
     NomEmpresa:{type:String,required:true,trim:true},
     Perfil:{type:String,required:true,trim:true},
     Catidad:{type:Number,required:true},
-    Estudiantes:[],
+    Estudiantes:[]
 });
 
 
