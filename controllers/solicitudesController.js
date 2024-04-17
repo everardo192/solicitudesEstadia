@@ -1,6 +1,9 @@
 import Solicitud from "../models/Solicitudes.js";
 
-
+/**
+ * Esta funcion crea una nueva solicitud 
+ * usando el nombre de la empresa
+ */
 const crearSolicitud = async (req,res) => {
     try{
         //  Si no estan todos los campos en el formulario, no se hace el registro
@@ -13,7 +16,21 @@ const crearSolicitud = async (req,res) => {
     }
 }
 
+/**
+ * Esta funcion lista las solicitudes por 
+ * empresa
+ */
+const solicitudesEmpresa = async (req,res) => {
+    const { nombre } =  req.body;
+    try {
+        const solicitudes = await Solicitud.find().where('NomEmpresa').equals(nombre);
+        return res.json({msg:"Tus Solicitudes: ",datos:solicitudes})
+    } catch (error) {
+        return res.json({msg:"No se encontraron solicitudes"});
+    }
+}
 
 export{
-    crearSolicitud
+    crearSolicitud,
+    solicitudesEmpresa
 }

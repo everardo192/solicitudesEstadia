@@ -3,8 +3,9 @@ import dotenv from 'dotenv';
 import cors from "cors"; // permitir coneiones desde el domini del front
 
 import conectarDB from './config/db.js'
-import estudianteRouter from './routes/estudianteRoutes.js';
-import solicitudesRouter from './routes/solicitudesRoutes.js';
+//import estudianteRouter from './routes/estudianteRoutes.js';
+import solicitudesRoutes from './routes/solicitudesRoutes.js';
+import empresaRoutes from './routes/empresaRoutes.js';
 
 const APP = express();  //  Para concentrar la funcionalidad de express
 dotenv.config();    // va a buscar por un archivo .env
@@ -32,8 +33,9 @@ const corsOptions = {
 
 //  APP.use(cors(corsOptions)); --SOLO SE DESCONECTA PARA USARSE CON EL FRONTEND
     //  Para cada solicitud la ruta inicia:'http://localhost:4000/(rutas index.js)/(rutas router/archivoRutas.js)' 
-APP.use('/app/estudiante',estudianteRouter);    //  Estudiantes
-APP.use('/app/solicitud',solicitudesRouter);    //  Solicitudes
+//comentado para otra funcionalidad  APP.use('/app/estudiante',estudianteRouter);    //  Estudiantes
+APP.use('/app/solicitud',solicitudesRoutes);    //  Solicitudes
+APP.use('/app/empresa',empresaRoutes);    //  Empresa
 
 
 //  Escucha las conexiones en el puerto 4000
