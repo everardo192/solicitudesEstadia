@@ -32,6 +32,7 @@ const corsOptions = {
 //- routing Rutas principales
 
 //  APP.use(cors(corsOptions)); --SOLO SE DESCONECTA PARA USARSE CON EL FRONTEND
+APP.use(cors(corsOptions));
     //  Para cada solicitud la ruta inicia:'http://localhost:4000/(rutas index.js)/(rutas router/archivoRutas.js)' 
 //comentado para otra funcionalidad  APP.use('/app/estudiante',estudianteRouter);    //  Estudiantes
 APP.use('/app/solicitud',solicitudesRoutes);    //  Solicitudes

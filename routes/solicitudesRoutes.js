@@ -1,7 +1,8 @@
 import express from 'express';
 import {
     crearSolicitud,
-    solicitudesEmpresa
+    solicitudesEmpresa,
+    editarSolicitud
 } 
 from "../controllers/solicitudesController.js"; // metodos del controlador
 
@@ -9,7 +10,8 @@ const router = express.Router(); // Esto es para poder usar los metodos http (po
 
 
 router.post('/add',crearSolicitud); // Primer seccion se ruta para insertar
-router.get('/list',solicitudesEmpresa); // Para listar registros
+router.post('/list',solicitudesEmpresa); // Para listar registros
+router.get('/edit/:id',editarSolicitud); // Para editar registros
 
 
 // asi se exporta el router para poder ser usado en el index (rutas principales)

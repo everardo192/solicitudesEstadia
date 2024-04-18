@@ -21,16 +21,32 @@ const crearSolicitud = async (req,res) => {
  * empresa
  */
 const solicitudesEmpresa = async (req,res) => {
-    const { nombre } =  req.body;
+    const { nombreEmpresa } =  req.body;
+    console.log(req.body);
     try {
-        const solicitudes = await Solicitud.find().where('NomEmpresa').equals(nombre);
+        const solicitudes = await Solicitud.find().where('NomEmpresa').equals(nombreEmpresa);
         return res.json({msg:"Tus Solicitudes: ",datos:solicitudes})
     } catch (error) {
         return res.json({msg:"No se encontraron solicitudes"});
     }
 }
 
+const editarSolicitud = async (req,res) => {
+    // Recuperar id
+    const { id } = req.params;
+    try {
+        //  Tarer Registro
+        const existeSolicitud = await Solicitud.find({'_id':id});
+        
+        console.log(existeSolicitud);
+        res.json(existeSolicitud);
+    } catch (error) {
+        res.json({msg:"No se encontro la solicitud"});
+    }
+}
+
 export{
     crearSolicitud,
-    solicitudesEmpresa
+    solicitudesEmpresa,
+    editarSolicitud,
 }
