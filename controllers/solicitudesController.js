@@ -31,22 +31,56 @@ const solicitudesEmpresa = async (req,res) => {
     }
 }
 
+const obtenerUnaSolicitud = async (req,res) => {
+    const {id} =req.params;
+    try {
+        const unaSolicitud = await Solicitud.findById(id);
+        return res.json(unaSolicitud);
+    } catch (error) {
+        return res.json({msg:"Error en el servidor"})
+    }
+}
+
 const editarSolicitud = async (req,res) => {
     // Recuperar id
     const { id } = req.params;
+    console.log('params');
+    console.log(req.params);
+    console.log('body');
+    console.log(req.body);
     try {
         //  Tarer Registro
-        const existeSolicitud = await Solicitud.find({'_id':id});
-        
+        const existeSolicitud = await Solicitud.findById(id);
+        //PRinTec
         console.log(existeSolicitud);
-        res.json(existeSolicitud);
+        existeSolicitud.NomEmpresa = req.body.NomEmpresa || existeSolicitud.NomEmpresa;
+        existeSolicitud.Perfil = req.body.Perfil || existeSolicitud.Perfil;
+        existeSolicitud.Cantidad = req.body.Cantidad || existeSolicitud.Cantidad;
+        console.log(existeSolicitud);
+        const solicitudEditada = await existeSolicitud.save();
+        return res.json({msg:"Cambios Realizados"});
     } catch (error) {
         res.json({msg:"No se encontro la solicitud"});
+    }
+}
+
+const borrarSolicitud = async (req,res) => {
+    const {id} = req.params;
+    try {
+        const unaSolicitud = await Solicitud.findByIdAndDelete(id); 
+        if(unaSolicitud){
+            console.log(unaSolicitud);
+        }
+        return res.json({msg:"Registro eliminado"});
+    } catch (error) {
+        return res.json({msg:"Error en el servidor"})
     }
 }
 
 export{
     crearSolicitud,
     solicitudesEmpresa,
+    obtenerUnaSolicitud,
     editarSolicitud,
+    borrarSolicitud
 }
